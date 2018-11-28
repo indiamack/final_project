@@ -1,0 +1,51 @@
+body{
+  margin: 0;
+  background-image: url('../img/landsat_8_usgs.jpg');
+  background-position: top center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.site{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 500px 500px 500px;
+  grid-template-areas:
+    'st st st st st st'
+    'mn mn mn mn mn mn'
+    'cc cc cc cc cc cc';
+  background-color: #fff;
+  margin: 10px;
+}
+
+.flex{
+  display: flex;
+  align-items: center;
+}
+
+/* Intro Pannel ----------------------------------------------*/
+@font-face {
+  font-family: Head;
+  src: url('../img/BungeeOutline-Regular.ttf');
+}
+
+h1{
+  font-family: Head;
+  color: white;
+}
+
+#intro{
+  grid-column: st;
+}
+
+/* Main Pannel ----------------------------------------------*/
+
+#main{
+  grid-column: mn;
+}
+
+/* Climate Change Pannel ----------------------------------------------*/
+
+#end{
+  grid-column: cc;
+}
