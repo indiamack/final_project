@@ -60,15 +60,21 @@ h1{
   grid-column: pn;
 }
 
-#city{
+#city-window{
   grid-column: 3/9;
   grid-row-start: 1;
   grid-row-end: 4;
-  display: none;
 }
 
-#myPieChart{
+#rural-window{
+  grid-column: 3/9;
+  grid-row-start: 1;
+  grid-row-end: 4;
+}
 
+#hydrograph{
+  width: 80%;
+  height: 30%;
 }
 /* Climate Change Pannel ----------------------------------------------*/
 
