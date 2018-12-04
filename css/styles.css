@@ -28,14 +28,35 @@ body{
   src: url('../img/BungeeOutline-Regular.ttf');
 }
 
-#intro h1{
-  font-family: Head;
-  color: white;
-  position: relative;
-}
 
 #intro{
   grid-column: st;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-areas:
+    'mp mp mp mp mp mp mp mp'
+    '. . . . . . . .'
+    '. . . . ti ti ti ti';
+}
+
+#open-title{
+  grid-column: ti;
+  grid-row: 3/4;
+  padding: 45px;
+  text-align: right;
+}
+
+#intro h1{
+  font-family: Head;
+  font-size: 60px;
+  color: white;
+  margin: 0;
+}
+
+#open-map{
+  grid-column: mp;
+  grid-row: 1/4;
 }
 
 #intro img{
@@ -86,7 +107,7 @@ body{
 
 #hydrograph{
   width: 80%;
-  height: 30%;
+  height: 80%;
 }
 /* Climate Change Pannel ----------------------------------------------*/
 

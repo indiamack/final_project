@@ -8,11 +8,25 @@
 </head>
 <body class='site'>
   <div id="intro">
-    <img src="img/landsat_8_usgs.jpg" alt="image-map" usemap="#image-map">
-    <map name="image-map" id="image-map">
-          <area  alt="beaufort" id="beaufort" href="#" coords="2952,754,3129,807,3129,672,3246,601,3241,477,2999,477,2916,560" shape="poly">
-    </map>
-    <h1>Upstream  / Downstream</h1>
+    <div id="open-map">
+      <img src="img/landsat_8_usgs.jpg" alt="image-map" usemap="#image-map">
+      <map name="image-map" id="image-map">
+        <area id="beaufort" alt="beaufort" title="beaufort" href="#" coords="2663,701,2704,713,2769,742,2846,719,2810,648,2834,601,2816,566,2840,542,2828,501,2852,454,2787,436,2710,518,2728,554,2722,583,2681,613,2710,636,2675,654,2486,513" shape="poly">
+        <area id="morehead" alt="morehead" title="morehead" href="#" coords="2628,672,2657,713,2581,672,2475,654,2345,636,2274,642,2251,601,2168,548,2257,530,2321,566,2380,589,2398,560,2522,554,2575,577" shape="poly">
+        <area id="atlantic" alt="atlantic" title="atlantic" href="#" coords="2569,725,2569,754,2498,748,2386,742,2321,748,2310,713,2369,707,2398,677,2475,695,2516,719" shape="poly">
+        <area id="pineknoll" alt="pineknoll" title="pineknoll" href="#" coords="2301,715,2309,749,2075,771,2072,745,2135,745,2198,708,2227,715" shape="poly">
+        <area id="emerald" alt="emerald" title="emerald" href="#" coords="2068,767,2046,767,2012,756,1986,756,1953,782,1831,797,1790,801,1749,804,1705,815,1657,819,1631,808,1382,878,1364,927,1486,882,1631,845" shape="poly">
+        <area id="harkers" alt="harkers" title="harkers" href="#" coords="2942,738,3117,797,3113,763,2998,730,3013,704,2931,689" shape="poly">
+        <area id="swansboro" alt="swansboro" title="swansboro" href="#" coords="1264,812,1279,771,1316,756,1330,704,1312,630,1260,682,1182,660,1186,745,1227,801" shape="poly">
+        <area id="newport" alt="newport" title="newport" href="#" coords="2160,430,2142,389,2094,282,2035,308,2023,393,1857,467,1909,534,2001,560,2138,530,2179,489" shape="poly">
+        <area id="topsail" alt="topsail" title="topsail" href="#" coords="615,1293,604,1312,611,1334,452,1419,352,1475,96,1623,70,1586,126,1538,311,1445,371,1405,515,1364,578,1267,589,1245,608,1271" shape="poly">
+        <area id="lookout" alt="lookout" title="lookout" href="#" coords="3028,982,3113,1253,3109,1116,3168,978,3376,663,3539,441,3698,274,3906,82,3873,37,3691,185,3546,378,3194,778,3165,934,3131,1004,3098,1067,3072,1056" shape="poly">
+        <area id="onslow" alt="onslow" title="onslow" href="#" coords="3113,1290,3013,956,2690,804,2375,782,1360,952,674,1345,56,1723,33,2668,4151,2676" shape="poly">
+      </map>
+    </div>
+    <div id="open-title" class="flex">
+      <h1>Upstream  / Downstream</h1>
+    </div>
   </div>
   <div id="main">
     <div id="map"></div>
