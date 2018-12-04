@@ -9,13 +9,12 @@ body{
 .site{
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 500px 500px 500px;
+  grid-template-rows: 500px 600px 500px;
   grid-template-areas:
     'st st st st st st'
     'mn mn mn mn mn mn'
     'cc cc cc cc cc cc';
   background-color: #fff;
-  margin: 10px;
 }
 
 .flex{
@@ -42,8 +41,35 @@ h1{
 
 #main{
   grid-column: mn;
+  background-color: #ccc;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-areas:
+    'mp mp . . . . . .'
+    '. . cc cc cc cc cc cc'
+    'pn pn . . . . . .';
 }
 
+#map{
+  grid-column: mp;
+  grid-row: span 2;
+}
+
+#chapelhill{
+  grid-column: pn;
+}
+
+#city{
+  grid-column: 3/9;
+  grid-row-start: 1;
+  grid-row-end: 4;
+  display: none;
+}
+
+#myPieChart{
+
+}
 /* Climate Change Pannel ----------------------------------------------*/
 
 #end{

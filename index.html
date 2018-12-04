@@ -5,18 +5,28 @@
   <link rel="stylesheet" href="css/styles.css" type="text/css" />
 </head>
 <body class='site'>
-  <div id="intro flex">
+  <div id="intro">
     <h1>Upstream  / Downstream</h1>
   </div>
-  <div id="main flex">
+  <div id="main">
+    <div id="map"></div>
+    <div id="chapelhill"></div>
+    <div id="city">
+      <div id="hydrograph" style="width: 900px; height: 500px"></div>
+    </div>
+  </div>
+  <div id="end">
 
   </div>
-  <div id="end flex">
-
-  </div>
 
 
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="crossorigin="anonymous"></script>
-  <script src="js/scripts.js"></script>
+  <script
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCGoOLJBi7r-iVCsBRbFO6Nq9tZGnlVzgc&callback=initMap"
+      async defer></script>
+    <script src="js/scripts.js"></script>
 </body>
 </html>
