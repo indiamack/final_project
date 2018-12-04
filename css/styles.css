@@ -1,15 +1,15 @@
 body{
   margin: 0;
-  background-image: url('../img/landsat_8_usgs.jpg');
+  /*background-image: url('../img/landsat_8_usgs.jpg');
   background-position: top center;
   background-size: contain;
-  background-repeat: no-repeat;
+  background-repeat: no-repeat; */
 }
 
 .site{
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 500px 600px 500px;
+  grid-template-rows: 600px 600px 500px;
   grid-template-areas:
     'st st st st st st'
     'mn mn mn mn mn mn'
@@ -28,13 +28,19 @@ body{
   src: url('../img/BungeeOutline-Regular.ttf');
 }
 
-h1{
+#intro h1{
   font-family: Head;
   color: white;
+  position: relative;
 }
 
 #intro{
   grid-column: st;
+}
+
+#intro img{
+  width: 100%;
+  height: auto;
 }
 
 /* Main Pannel ----------------------------------------------*/
@@ -67,6 +73,12 @@ h1{
 }
 
 #rural-window{
+  grid-column: 3/9;
+  grid-row-start: 1;
+  grid-row-end: 4;
+}
+
+#coast-window{
   grid-column: 3/9;
   grid-row-start: 1;
   grid-row-end: 4;

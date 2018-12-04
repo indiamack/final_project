@@ -3,17 +3,24 @@
 <head>
   <title>Final Project</title>
   <link rel="stylesheet" href="css/styles.css" type="text/css" />
+  <link rel="stylesheet" type="text/css" href="tipped/css/tipped/tipped.css"/>
+
 </head>
 <body class='site'>
   <div id="intro">
+    <img src="img/landsat_8_usgs.jpg" alt="image-map" usemap="#image-map">
+    <map name="image-map" id="image-map">
+          <area  alt="beaufort" id="beaufort" href="#" coords="2952,754,3129,807,3129,672,3246,601,3241,477,2999,477,2916,560" shape="poly">
+    </map>
     <h1>Upstream  / Downstream</h1>
   </div>
   <div id="main">
     <div id="map"></div>
     <div id="chapelhill"></div>
     <div id="city-window"></div>
-    <div id="sub-window"></div>
     <div id="rural-window"></div>
+    <div id="coast-window"></div>
+
 
   </div>
   <div id="end">
@@ -28,6 +35,8 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCGoOLJBi7r-iVCsBRbFO6Nq9tZGnlVzgc&callback=initMap"
       async defer></script>
+    <script type="text/javascript" src="image-mapping/dist/image-map.js"></script>
+    <script type="text/javascript" src="tipped/js/tipped/tipped.js"></script>
     <script src="js/scripts.js"></script>
 </body>
 </html>
