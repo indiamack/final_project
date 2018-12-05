@@ -1,14 +1,16 @@
 // google maps Api -----------------------------------------------
+var chapelHill = {lat: 35.9133401, lng: -79.0551539};
+var duplinCounty = {lat:35.039195, lng: -78.0494692};
+var baldHead = {lat: 33.8774832, lng:-78.0019814};
+var openPano = {lat: 35.2508316, lng: -75.5288925};
+var chosenPano = openPano;
+
 
 function initMap() {
-  var chapelHill = {lat: 35.7373006, lng: -79.0217736};
-  var duplinCounty = {lat:35.039195, lng: -78.0494692};
-  var baldHead = {lat: 33.8774832, lng:-78.0019814};
-  var openPano = {lat: 35.2509828, lng: -75.52909};
+
   var contentString = '<div class="window-heading flex">' + '<h2>Urban: Chapel Hill</h2>' + '</div>' + '<div id="hydrograph">'  +  '</div>' + '<div id="hy-text">' + '<p>In North Carolina’s urban counties, rain doesn’t always fall on soil. There is miles and miles filled with highways, parking lots, driveways, houses, schools and office buildings – all impermeable surfaces. Impermeable surfaces do not allow precipitation to infiltrate and filter through the soil, a process essential for a healthy stream flow. The higher percentage of impermeable surfaces in an area, the more rainwater that runs directly into streams and rivers instead moving slowly through soil to groundwater. A larger volume of runoff picks up more nutrients and toxins along the way which goes into the state’s waterways. Those substances –including lawn clippings, herbicides, fertilizers – make their way downstream, where there are consequences for the health of both people and the environment.</p>' + '</div>' + '<div id="hy-text-2"><p>The hydrograph shows the difference in stream flow between urban, suburban, and rural areas, which each have increasingly less impermeable surfaces.  The more developed an area is, the quicker and higher the peak flow is, which means more runoff.</p></div>' + '</div>';
   var contentString2 = '<div class="window-heading flex">' + '<h2>Agriculture: Duplin County</h2>' + '</div>'+ '<img id="dashboard_div" src="img/hogs.jpg">' + '<div id="hy-text">' + '<p>Duplin County has more hogs than anywhere else in the United States -- which means they have more hog waste, too. The waste at the large factory farms in North Carolina is primparily stored in lagoons, open-air pits alongside the livestock houses. When it rains, that water goes into the lagoons, instantly becoming contaminated with untreated waste. The same thing happens when a hurricane comes through and floods the farm. The rainwater eventually washes downstream, bringing exessive nutrients and pathogens with it.</p>' + '</div>';
   var contentString3 = '<div class="window-heading flex">' + '<h2>Coast: Bald Head Island</h2>' + '</div>' + '<div id="dashboard_div">' + '</div>' + '<div id="hy-text">' + '<p>Excess nutrients and pathogens drive down water quality, which leads to fish kills. This is bad for ecosystem health and for North Carolinas commerical fishing industry. Since commerical fishings heyday in the early 1990s, annual landings have dropped dramatically and are not recovering. Controversial policy has been passed at a federal and state level to try and correct the issue, but when it comes to preserving habitat, most of the legislation lacks teeth.</p>' + '</div>';
-  var chosenPano = openPano;
 
 
 
@@ -23,7 +25,7 @@ function initMap() {
     // The marker, positioned at Jordan Lake near Chapel Hill
         var marker = new google.maps.Marker({
           position: chapelHill,
-          map: map,
+          map: map
         });
 
 
@@ -115,7 +117,7 @@ function initMap() {
             // The marker, positioned in Duplin County
             var marker2 = new google.maps.Marker({
               position: duplinCounty,
-              map: map,
+              map: map
             });
 
             var infowindow2 = new google.maps.InfoWindow({
@@ -138,7 +140,7 @@ function initMap() {
               // The marker, positioned in Bald Head Island
               var marker3 = new google.maps.Marker({
                 position: baldHead,
-                map: map,
+                map: map
               });
 
               var infowindow3 = new google.maps.InfoWindow({
@@ -274,7 +276,7 @@ function initMap() {
                         }
                       });
 
-                      map.setStreetView(panorama);
+                    map.setStreetView(panorama);
 
 
         } // end initMap
