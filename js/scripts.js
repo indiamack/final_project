@@ -5,7 +5,7 @@ function initMap() {
   var duplinCounty = {lat:35.039195, lng: -78.0494692};
   var baldHead = {lat: 33.8774832, lng:-78.0019814};
   var openPano = {lat: 35.2509828, lng: -75.52909};
-  var contentString = '<div id="hydrograph">'  +  '</div>' + '<div id="hy-text">' + '<p>In North Carolina’s urban counties, rain doesn’t always fall on soil. There is miles and miles filled with highways, parking lots, driveways, houses, schools and office buildings – all impermeable surfaces. Impermeable surfaces do not allow precipitation to infiltrate and filter through the soil, a process essential for a healthy stream flow. The higher percentage of impermeable surfaces in an area, the more rainwater that runs directly into streams and rivers instead moving slowly through soil to groundwater. A larger volume of runoff picks up more nutrients and toxins along the way which goes into the state’s waterways. Those substances –including lawn clippings, herbicides, fertilizers – make their way downstream, where there are consequences for the health of both people and the environment.</p>' + '<div id="hy-text-2"><p>The hydrograph shows the difference in stream flow between urban, suburban, and rural areas, which each have increasingly less impermeable surfaces.  The more developed an area is, the quicker and higher the peak flow is, which means more runoff.</p></div>' + '</div>';
+  var contentString = '<div id="hydrograph">'  +  '</div>' + '<div id="hy-text">' + '<p>In North Carolina’s urban counties, rain doesn’t always fall on soil. There is miles and miles filled with highways, parking lots, driveways, houses, schools and office buildings – all impermeable surfaces. Impermeable surfaces do not allow precipitation to infiltrate and filter through the soil, a process essential for a healthy stream flow. The higher percentage of impermeable surfaces in an area, the more rainwater that runs directly into streams and rivers instead moving slowly through soil to groundwater. A larger volume of runoff picks up more nutrients and toxins along the way which goes into the state’s waterways. Those substances –including lawn clippings, herbicides, fertilizers – make their way downstream, where there are consequences for the health of both people and the environment.</p>' + '</div>' + '<div id="hy-text-2"><p>The hydrograph shows the difference in stream flow between urban, suburban, and rural areas, which each have increasingly less impermeable surfaces.  The more developed an area is, the quicker and higher the peak flow is, which means more runoff.</p></div>' + '</div>';
   var contentString2 = '<div id="rural">' + '<h3>It working again</h3>' + '</div>';
   var contentString3 = '<div id="dashboard_div">' + '<div id="filter_div"></div>' + '<div id="chart_div"></div>' + '</div>';
   var chosenPano = openPano;
@@ -34,6 +34,7 @@ function initMap() {
           position: chapelHill,
           map: map,
         });
+
 
         var infowindow = new google.maps.InfoWindow({
             content: contentString
@@ -105,7 +106,7 @@ function initMap() {
                     title: 'Time'
                   },
                   vAxis: {
-                    title: 'Feet'
+                    title: 'Flow'
                   },
                   //colors: ['#a52714', '#097138'],
                   crosshair: {
@@ -164,72 +165,110 @@ function initMap() {
                   chosenPano = baldHead;
                   initMap();
                 });
-                // Load the Visualization API and the controls package.
-                  google.charts.load('current', {'packages':['corechart', 'controls']});
 
-                  // Set a callback to run when the Google Visualization API is loaded.
-                  google.charts.setOnLoadCallback(drawChart);
+                var url = './js/landings.json';
+                var landings = [];
+                var year = [];
+                var pounds = [];
+                var dollars = [];
 
-                  function drawChart() {
-                    var query = new google.visualization.Query('https://docs.google.com/spreadsheets/d/1m-xQc4OrhHg4YE30Sr5u9ALhm7jWo1pudYrhDHY7ekE/edit?usp=sharing&headers=1');
-                    query.send(handleQueryResponse);
-                  }
+                $.ajax({
+                  type: 'GET',
+                  dataType: 'json',
+                  data: landings,
+                  url: url,
+                  async: true,
+                  success: function(landings){
+                    console.log(landings);
 
-                  function handleQueryResponse(response) {
-                    var data = response.getDataTable();
-                    var chart = new google.visualization.LineChart(document.getElementById('dashboard_div'));
-                    chart.draw(data, null);
-                  }
+                    for (i=0; i < landings.length; i++){
+                      if(landings[i].Species == 'TOTAL'){
+                      year.push(landings[i].Year);
+                      pounds.push(landings[i].Pounds);
+                      dollars.push(landings[i].Dollars);
+                    }
+                    }//for loop
+                    buildChart1();
 
+                  } //success
 
+                });//ajax
 
+                function buildChart1(){
+                Highcharts.chart('dashboard_div', {
 
+                    chart: {
+                        type: 'line'
+                    },
 
-              /*  // Load the Visualization API and the controls package.
-                google.charts.load('current', {'packages':['corechart', 'controls']});
+                    data: landings,
 
-                // Set a callback to run when the Google Visualization API is loaded.
-                google.charts.setOnLoadCallback(drawDashboard);
+                    title: {
+                        text: 'Landings'
+                    },
 
-                   function drawDashboard() {
-                     var query = new google.visualization.Query('https://docs.google.com/spreadsheets/d/1m-xQc4OrhHg4YE30Sr5u9ALhm7jWo1pudYrhDHY7ekE/edit?usp=sharing');
-                     query.send(handleQueryResponse);
-                   } //end drawDashboard
+                    subtitle: {
+                        text: 'Source: U.S. Dept. of Agriculture Food and Nurition Service'
+                    },
 
-                   function handleQueryResponse(response) {
-                     var data = response.getDataTable();
-                     var dashboard = new google.visualization.Dashboard(
-                                 document.getElementById('dashboard_div'));
-                       // Create a range slider, passing some options
-                     var speciesRangeSlider = new google.visualization.ControlWrapper({
-                     'controlType': 'DateRangeFilter',
-                     'containerId': 'filter_div',
-                     'options': {
-                     'filterColumnLabel': 'Name'
-                     }
-                     });
+                    xAxis: {
+                        categories: year
+                      },
 
-                     // Create a line chart, passing some options
-                     var lineChart = new google.visualization.ChartWrapper({
-                     'chartType': 'LineChart',
-                     'containerId': 'chart_div',
-                     'options': {
-                       'width': 300,
-                       'height': 300,
-                       'hAxis': {
-                           'title': 'Time'
-                         },
-                       'vAxis': {
-                         'title': 'Pounds'
-                       }
-                     }
-                     });
+                    yAxis: [{ // left y axis
+                        title: {
+                            text: 'Percent Students Participating'
+                        },
+                        labels: {
+                            align: 'left',
+                            x: 3,
+                            y: 16,
+                            format: '{value:.,0f}'
+                        },
+                        showFirstLabel: false
+                    }, { // right y axis
+                        linkedTo: 0,
+                        gridLineWidth: 0,
+                        opposite: true,
+                        title: {
+                            text: null
+                        },
+                        labels: {
+                            align: 'right',
+                            x: -3,
+                            y: 16,
+                            format: '{value:.,0f}'
+                        },
+                        showFirstLabel: false
+                    }],
 
-                       dashboard.bind(speciesRangeSlider, lineChart);
-                       dashboard.draw(data);
+                    legend: {
+                        align: 'left',
+                        verticalAlign: 'top',
+                        borderWidth: 0
+                    },
 
-                   } */
+                    tooltip: {
+                        shared: true,
+                        crosshairs: true
+                    },
 
+                    plotOptions: {
+                        series: {
+
+                        }
+                    },
+
+                    series: [{
+                        name: 'Summer Food Serive Program',
+                        data: pounds
+                    }, {
+                        name: 'National School Lunch Program',
+                        data: dollars
+                    }]
+                });
+
+                }
 
 
         } // end initMap
@@ -262,6 +301,24 @@ Tipped.create('#newport', 'Newport', { target: 'mouse', position: 'top' });
 Tipped.create('#topsail', 'North Topsail Beach', { target: 'mouse', position: 'top' });
 Tipped.create('#lookout', 'Cape Lookout National Seashore', { target: 'mouse', position: 'top' });
 Tipped.create('#onslow', 'Onslow Bay', { target: 'mouse', position: 'top' });
+
+/* require([
+      "esri/Map",
+      "esri/views/MapView",
+      "dojo/domReady!"
+    ], function(Map, MapView) {
+
+    var map = new Map({
+      basemap: "topo-vector"
+    });
+
+    var view = new MapView({
+      container: "end",
+      map: map,
+      center: [-118.71511,34.09042],
+      zoom: 10
+    });
+  }); */
 
 
 }); // end scripts
