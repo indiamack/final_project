@@ -5,9 +5,9 @@ function initMap() {
   var duplinCounty = {lat:35.039195, lng: -78.0494692};
   var baldHead = {lat: 33.8774832, lng:-78.0019814};
   var openPano = {lat: 35.2509828, lng: -75.52909};
-  var contentString = '<div id="hydrograph">' + '<h3>It working</h3>' + '</div>';
+  var contentString = '<div id="hydrograph">'  +  '</div>' + '<div id="hy-text">' + '<p>In North Carolina’s urban counties, rain doesn’t always fall on soil. There is miles and miles filled with highways, parking lots, driveways, houses, schools and office buildings – all impermeable surfaces. Impermeable surfaces do not allow precipitation to infiltrate and filter through the soil, a process essential for a healthy stream flow. The higher percentage of impermeable surfaces in an area, the more rainwater that runs directly into streams and rivers instead moving slowly through soil to groundwater. A larger volume of runoff picks up more nutrients and toxins along the way which goes into the state’s waterways. Those substances –including lawn clippings, herbicides, fertilizers – make their way downstream, where there are consequences for the health of both people and the environment.</p>' + '<div id="hy-text-2"><p>The hydrograph shows the difference in stream flow between urban, suburban, and rural areas, which each have increasingly less impermeable surfaces.  The more developed an area is, the quicker and higher the peak flow is, which means more runoff.</p></div>' + '</div>';
   var contentString2 = '<div id="rural">' + '<h3>It working again</h3>' + '</div>';
-  var contentString3 = '<div id="coast">' + '<h3>It working again times 3</h3>' + '</div>';
+  var contentString3 = '<div id="dashboard_div">' + '<div id="filter_div"></div>' + '<div id="chart_div"></div>' + '</div>';
   var chosenPano = openPano;
 
 
@@ -41,8 +41,11 @@ function initMap() {
 
         var infoSection = document.getElementById('city-window');
 
+        var openSection= document.getElementById('explore');
+
         marker.addListener('click', function() {
             console.log('testing');
+            openSection.innerHTML = '';
             infoSection2.innerHTML = '';
             infoSection3.innerHTML = '';
             infoSection.innerHTML = contentString;
@@ -51,47 +54,70 @@ function initMap() {
           });
 
 
-      // google charts API -----------------------
-           google.charts.load('current', {'packages':['corechart']});
-                  google.charts.setOnLoadCallback(drawChart);
+      // google charts API for Hyrdograph-----------------------
+      google.charts.load('current', {packages: ['corechart', 'line']});
+      google.charts.setOnLoadCallback(drawCrosshairs);
 
-            function drawChart() {
+                function drawCrosshairs() {
 
-              var data = new google.visualization.DataTable();
-                  data.addColumn('number', 'Time');
-                  data.addColumn('number', 'Urban');
-                  data.addColumn('number', 'Suburban');
-                  data.addColumn('number', 'Rural');
-                  data.addRows([
-                    [0, 1, 2, 3]
-                  ]);
+                  var data = new google.visualization.DataTable();
+                      data.addColumn('number', 'Time');
+                      data.addColumn('number', 'Rural');
+                      data.addColumn('number', 'Suburban');
+                      data.addColumn('number', 'Urban');
+                      data.addRows([
+                        [0.21,	0.18,	0.26,	0.11],
+                        [0.87,	0.59,	1.52,	5.10],
+                        [1.20,	0.81,	2.72,	7.68],
+                        [1.53,	1.03,	4.21,	8.90],
+                        [1.86,	1.25,	5.15,	8.78],
+                        [2.19,	1.48,	5.31,	8.07],
+                        [2.52,	1.69,	5.18,	7.03],
+                        [2.85,	1.91,	4.97,	5.84],
+                        [3.18,	2.12,	4.48,	4.50],
+                        [3.51,	2.32,	3.94,	3.42],
+                        [3.84,	2.50,	3.10,	2.45],
+                        [4.17,	2.65,	2.29,	1.61],
+                        [4.50,	2.67,	1.62,	0.94],
+                        [4.83,	2.57,	1.13,	0.47],
+                        [5.15,	2.45,	0.72,	0.20],
+                        [5.48,	2.32, 0.44, 0],
+                        [5.81,	2.19,	0.30, 0],
+                        [6.13,	2.05,	0.24, 0],
+                        [6.46,	1.91, 0, 0],
+                        [6.78,	1.76, 0, 0],
+                        [7.11,	1.61, 0, 0],
+                        [7.44,	1.47, 0, 0],
+                        [7.76,	1.33, 0, 0],
+                        [8.09,	1.18, 0, 0 ],
+                        [8.42,	1.03, 0, 0 ],
+                        [8.74,	0.89, 0, 0],
+                        [9.07,	0.74, 0, 0],
+                        [9.40,	0.60, 0, 0],
+                        [9.72,	0.47, 0, 0],
+                        [10.03,	0.35, 0, 0]
+
+                      ]);
 
 
+                var options = {
+                  hAxis: {
+                    title: 'Time'
+                  },
+                  vAxis: {
+                    title: 'Feet'
+                  },
+                  //colors: ['#a52714', '#097138'],
+                  crosshair: {
+                    color: '#000',
+                    trigger: 'selection'
+                  }
+                };
 
+                  var chart = new google.visualization.LineChart(document.getElementById('hydrograph'));
 
-
-              //   data.addColumn('number', 'Urban');
-            //     data.addColumn('number', 'Suburban');
-              //   data.addColumn('number', 'Rural');
-              //   data.addRows([
-              //     ['Mushrooms', 3],
-              //     ['Onions', 1],
-              //     ['Olives', 1],
-              //     ['Zucchini', 1],
-              //     ['Pepperoni', 2]
-              //   ]);
-
-
-              var options = {
-                title: 'Hydrograph',
-                curveType: 'function',
-                legend: { position: 'bottom' }
-              };
-
-              var chart = new google.visualization.LineChart(document.getElementById('hydrograph'));
-
-              chart.draw(data, options);
-            } //end Drawchart
+             chart.draw(data, options);
+           } //end DrawcCrosshairs
 
 
             // The marker, positioned in Duplin County
@@ -108,6 +134,7 @@ function initMap() {
 
             marker2.addListener('click', function() {
                 console.log('testing2');
+                openSection.innerHTML = '';
                 infoSection.innerHTML = '';
                 infoSection3.innerHTML = '';
                 infoSection2.innerHTML = contentString2;
@@ -130,12 +157,79 @@ function initMap() {
 
               marker3.addListener('click', function() {
                   console.log('testing3');
+                  openSection.innerHTML = '';
                   infoSection.innerHTML = '';
                   infoSection2.innerHTML = '';
                   infoSection3.innerHTML = contentString3;
                   chosenPano = baldHead;
                   initMap();
                 });
+                // Load the Visualization API and the controls package.
+                  google.charts.load('current', {'packages':['corechart', 'controls']});
+
+                  // Set a callback to run when the Google Visualization API is loaded.
+                  google.charts.setOnLoadCallback(drawChart);
+
+                  function drawChart() {
+                    var query = new google.visualization.Query('https://docs.google.com/spreadsheets/d/1m-xQc4OrhHg4YE30Sr5u9ALhm7jWo1pudYrhDHY7ekE/edit?usp=sharing&headers=1');
+                    query.send(handleQueryResponse);
+                  }
+
+                  function handleQueryResponse(response) {
+                    var data = response.getDataTable();
+                    var chart = new google.visualization.LineChart(document.getElementById('dashboard_div'));
+                    chart.draw(data, null);
+                  }
+
+
+
+
+
+              /*  // Load the Visualization API and the controls package.
+                google.charts.load('current', {'packages':['corechart', 'controls']});
+
+                // Set a callback to run when the Google Visualization API is loaded.
+                google.charts.setOnLoadCallback(drawDashboard);
+
+                   function drawDashboard() {
+                     var query = new google.visualization.Query('https://docs.google.com/spreadsheets/d/1m-xQc4OrhHg4YE30Sr5u9ALhm7jWo1pudYrhDHY7ekE/edit?usp=sharing');
+                     query.send(handleQueryResponse);
+                   } //end drawDashboard
+
+                   function handleQueryResponse(response) {
+                     var data = response.getDataTable();
+                     var dashboard = new google.visualization.Dashboard(
+                                 document.getElementById('dashboard_div'));
+                       // Create a range slider, passing some options
+                     var speciesRangeSlider = new google.visualization.ControlWrapper({
+                     'controlType': 'DateRangeFilter',
+                     'containerId': 'filter_div',
+                     'options': {
+                     'filterColumnLabel': 'Name'
+                     }
+                     });
+
+                     // Create a line chart, passing some options
+                     var lineChart = new google.visualization.ChartWrapper({
+                     'chartType': 'LineChart',
+                     'containerId': 'chart_div',
+                     'options': {
+                       'width': 300,
+                       'height': 300,
+                       'hAxis': {
+                           'title': 'Time'
+                         },
+                       'vAxis': {
+                         'title': 'Pounds'
+                       }
+                     }
+                     });
+
+                       dashboard.bind(speciesRangeSlider, lineChart);
+                       dashboard.draw(data);
+
+                   } */
+
 
 
         } // end initMap
@@ -144,99 +238,9 @@ function initMap() {
 
 
 
-// google charts API -------------------------------------------
 
 
-google.charts.load('current', {packages: ['corechart', 'line']});
-google.charts.setOnLoadCallback(drawCrosshairs);
 
-function drawCrosshairs() {
-      var data = new google.visualization.DataTable();
-      data.addColumn('number', 'X');
-      data.addColumn('number', 'Dogs');
-      data.addColumn('number', 'Cats');
-
-      data.addRows([
-        [0, 0, 0],    [1, 10, 5],   [2, 23, 15],  [3, 17, 9],   [4, 18, 10],  [5, 9, 5],
-        [6, 11, 3],   [7, 27, 19],  [8, 33, 25],  [9, 40, 32],  [10, 32, 24], [11, 35, 27],
-        [12, 30, 22], [13, 40, 32], [14, 42, 34], [15, 47, 39], [16, 44, 36], [17, 48, 40],
-        [18, 52, 44], [19, 54, 46], [20, 42, 34], [21, 55, 47], [22, 56, 48], [23, 57, 49],
-        [24, 60, 52], [25, 50, 42], [26, 52, 44], [27, 51, 43], [28, 49, 41], [29, 53, 45],
-        [30, 55, 47], [31, 60, 52], [32, 61, 53], [33, 59, 51], [34, 62, 54], [35, 65, 57],
-        [36, 62, 54], [37, 58, 50], [38, 55, 47], [39, 61, 53], [40, 64, 56], [41, 65, 57],
-        [42, 63, 55], [43, 66, 58], [44, 67, 59], [45, 69, 61], [46, 69, 61], [47, 70, 62],
-        [48, 72, 64], [49, 68, 60], [50, 66, 58], [51, 65, 57], [52, 67, 59], [53, 70, 62],
-        [54, 71, 63], [55, 72, 64], [56, 73, 65], [57, 75, 67], [58, 70, 62], [59, 68, 60],
-        [60, 64, 56], [61, 60, 52], [62, 65, 57], [63, 67, 59], [64, 68, 60], [65, 69, 61],
-        [66, 70, 62], [67, 72, 64], [68, 75, 67], [69, 80, 72]
-      ]);
-
-      var options = {
-        hAxis: {
-          title: 'Time'
-        },
-        vAxis: {
-          title: 'Popularity'
-        },
-        colors: ['#a52714', '#097138'],
-        crosshair: {
-          color: '#000',
-          trigger: 'selection'
-        }
-      };
-
-      var chart = new google.visualization.LineChart(document.getElementById('hydrograph'));
-
-      chart.draw(data, options);
-      chart.setSelection([{row: 38, column: 1}]);
-
-    }
-
-/*
-google.charts.load('current', {packages: ['corechart', 'line']});
-google.charts.setOnLoadCallback(drawCrosshairs);
-
-          function drawCrosshairs() {
-
-            var data = new google.visualization.DataTable();
-                data.addColumn('number', 'Time');
-                data.addColumn('number', 'Rural');
-                data.addColumn('number', 'Suburban');
-                data.addColumn('number', 'Urban');
-                data.addRows([
-                  [0.21,	0.18,	0.26,	0.11],
-                  [0.87,	0.59,	1.52,	5.10],
-                  [1.20,	0.81,	2.72,	7.68],
-                  [1.53,	1.03,	4.21,	8.90],
-                  [1.86,	1.25,	5.15,	8.78],
-                  [2.19,	1.48,	5.31,	8.07],
-                  [2.52,	1.69,	5.18,	7.03],
-                  [2.85,	1.91,	4.97,	5.84],
-                  [3.18,	2.12,	4.48,	4.50]
-                ]);
-
-
-          var options = {
-            hAxis: {
-              title: 'Time'
-            },
-            vAxis: {
-              title: 'Feet'
-            },
-            //colors: ['#a52714', '#097138'],
-            crosshair: {
-              color: '#000',
-              trigger: 'selection'
-            }
-          };
-
-            var chart = new google.visualization.LineChart(document.getElementById('hydrograph'));
-
-       chart.draw(data, options);
-     } //end DrawcCrosshairs
-
-
-*/
 
 
 $(function(){

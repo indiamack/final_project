@@ -9,7 +9,7 @@ body{
 .site{
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 600px 600px 500px;
+  grid-template-rows: 800px 600px 500px;
   grid-template-areas:
     'st st st st st st'
     'mn mn mn mn mn mn'
@@ -28,6 +28,11 @@ body{
   src: url('../img/BungeeOutline-Regular.ttf');
 }
 
+@font-face {
+  font-family: Roboto;
+  src: url('../img/Roboto/Roboto-Light.ttf');
+}
+
 
 #intro{
   grid-column: st;
@@ -44,7 +49,8 @@ body{
   grid-column: ti;
   grid-row: 3/4;
   padding: 45px;
-  text-align: right;
+  flex-direction:column;
+  color: white;
 }
 
 #intro h1{
@@ -52,6 +58,20 @@ body{
   font-size: 60px;
   color: white;
   margin: 0;
+  text-align: right;
+}
+
+#intro h4{
+  font-family: Roboto;
+  text-align: justify;
+  line-height: 1.3em;
+}
+
+#intro p{
+  font-family: Roboto;
+  text-align: right;
+  font-size: 12px;
+  color: #e0e0e0;
 }
 
 #open-map{
@@ -67,50 +87,145 @@ body{
 /* Main Pannel ----------------------------------------------*/
 
 #main{
+  padding: 20px;
   grid-column: mn;
-  background-color: #ccc;
+  background-color: #e9f6f7;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
   grid-template-areas:
-    'mp mp . . . . . .'
-    '. . cc cc cc cc cc cc'
-    'pn pn . . . . . .';
+    'mp mp mp mp mp mp . .'
+    '. . . . . . pn pn'
+    'cc cc cc cc cc cc cc cc';
 }
 
 #map{
   grid-column: mp;
-  grid-row: span 2;
+  grid-row: span 1;
 }
 
 #chapelhill{
   grid-column: pn;
+  grid-row: span 1;
 }
 
-#city-window{
-  grid-column: 3/9;
-  grid-row-start: 1;
-  grid-row-end: 4;
+#explore{
+  grid-column: cc;
+  grid-row: 2/3;
+  color: #757575;
+  font-family: Roboto;
+  text-align: center;
 }
+
+      /* City Panel ----------------------------------- */
+      #city-window{
+        padding-top: 15px;
+        grid-column: cc;
+        grid-row:2/4;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+        grid-template-areas:
+          'tx tx tx tx . . . .'
+          '. . . . hy hy hy hy'
+          'ph ph ph ph . . . .';
+      }
+
+      #hy-text, #hy-text-2{
+        grid-column: tx;
+        font-family: Roboto;
+        color: #0a0a0a;
+        text-align: justify;
+      }
 
 #rural-window{
-  grid-column: 3/9;
-  grid-row-start: 1;
-  grid-row-end: 4;
+  grid-column: cc;
+  grid-row:2/4;
 }
 
 #coast-window{
-  grid-column: 3/9;
-  grid-row-start: 1;
-  grid-row-end: 4;
+  grid-column: cc;
+  grid-row:2/4;
 }
 
 #hydrograph{
-  width: 80%;
-  height: 80%;
+  grid-column: hy;
+  grid-row: 1/4;
+  width: 100%;
+  height: auto;
 }
 /* Climate Change Pannel ----------------------------------------------*/
 
 #end{
   grid-column: cc;
+}
+
+/* Mobile ---------------------------------------------------------------*/
+@media screen and (max-width:767px){
+  .site{
+    grid-template-rows: 600px 800px 500px;
+  }
+
+  #intro{
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-areas:
+      'mp mp mp mp mp mp mp mp'
+      '. . . . . . . .'
+      'ti ti ti ti ti ti ti ti';
+      overflow: hidden;
+
+  }
+
+  #intro img{
+    height: 600px;
+    width: auto;
+  }
+
+  #open-title{
+    grid-column: ti;
+    grid-row: 3/4;
+  }
+
+  #intro h1{
+    font-size: 40px;
+    text-align: center;
+  }
+
+  #intro p{
+    font-size: 10px;
+    line-height: 1.3em;
+  }
+
+  #main{
+    grid-template-areas:
+      'mp mp mp mp mp mp mp mp'
+      'cc cc cc cc cc cc cc cc';
+  }
+
+  #chapelhill{
+    display: none;
+  }
+
+  #city-window{
+    padding-top: 15px;
+    grid-column: cc;
+    grid-row:2/4;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-areas:
+      'tx tx tx'
+      'hy hy hy'
+      'ph ph ph';
+  }
+
+  #hydrograph{
+    grid-row: 2/4;
+  }
+
+  #hy-text, #hy-text-2{
+    padding: 15px;
+  }
 }
