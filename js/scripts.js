@@ -320,24 +320,116 @@ $(function(){
         Tipped.create('#lookout', 'Cape Lookout National Seashore', { target: 'mouse', position: 'top' });
         Tipped.create('#onslow', 'Onslow Bay', { target: 'mouse', position: 'top' });
 
-        /* require([
-              "esri/Map",
-              "esri/views/MapView",
-              "dojo/domReady!"
-            ], function(Map, MapView) {
+// ArcGIS REST API ---------------------------------
 
-            var map = new Map({
-              basemap: "topo-vector"
-            });
+    require([
+        "esri/Map",
+        "esri/views/MapView",
+        "esri/layers/FeatureLayer",
+        "esri/widgets/Legend",
+      ],
+      function(
+        Map, MapView,
+        FeatureLayer,
+        Legend,
+      )
+      {
 
-            var view = new MapView({
-              container: "end",
-              map: map,
-              center: [-118.71511,34.09042],
-              zoom: 10
-            });
-          }); */
+        var map = new Map({
+          basemap: "hybrid"
+        });
 
+        var view = new MapView({
+          container: "climate-change",
+          map: map,
+
+          extent: { // autocasts as new Extent()
+            xmin: -8177811,
+            ymin: 4247000,
+            xmax: -9876791,
+            ymax: 4247784,
+            spatialReference: 102100
+          }
+        });
+
+        var template = { // autocasts as new PopupTemplate()
+        title: "Social Vulnerability to Natural Disaster",
+        content: [{
+          // It is also possible to set the fieldInfos outside of the content
+          // directly in the popupTemplate. If no fieldInfos is specifically set
+          // in the content, it defaults to whatever may be set within the popupTemplate.
+          type: "fields",
+          fieldInfos: [{
+            fieldName: "OBJECTID",
+            label: "Location",
+            visible: false
+          }, {
+            fieldName: "ST_ABBREV",
+            label: "State",
+            visible: true,
+            format: {
+              digitSeparator: true,
+              places: 0
+            }
+          }, {
+            fieldName: "VulnerabilityScore",
+            label: "Vulnerability Score",
+            visible: true,
+            format: {
+              digitSeparator: true,
+              places: 3
+            }
+          },{
+            fieldName: "TOTPOP_CY",
+            label: "Total Population",
+            visible: true,
+            format: {
+              digitSeparator: true,
+              places: 0
+            }
+          }]
+        }]
+      };
+        /********************
+         * Add feature layer
+         ********************/
+
+        var featureLayer = new FeatureLayer({
+          url: "https://services.arcgis.com/nGt4QxSblgDfeJn9/arcgis/rest/services/Social_Vulnerability_2010/FeatureServer/0/query",
+          outFields: ["OBJECTID", "ST_ABBREV", "TOTPOP_CY", "VulnerabilityScore"],
+          popupTemplate: template
+        });
+
+        map.add(featureLayer);
+
+        var legend = new Legend({
+            view: view,
+            layerInfos: [{
+              layer: featureLayer,
+              title: "Legend"
+            }]
+          });
+
+          view.ui.add(legend, "bottom-right");
+
+          view.when(function() {
+          // get the first layer in the collection of operational layers in the WebMap
+          // when the resources in the MapView have loaded.
+          var featureLayer = webmap.layers.getItemAt(0);
+
+          var legend = new Legend({
+            view: view,
+            layerInfos: [{
+              layer: featureLayer,
+              title: "NY Educational Attainment"
+            }]
+          });
+
+          // Add widget to the bottom right corner of the view
+          view.ui.add(legend, "bottom-right");
+        });
+
+      }); //end esri function
 
 
 

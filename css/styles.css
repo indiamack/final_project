@@ -201,11 +201,17 @@ h2{
 #end{
   grid-column: cc;
 }
+.esri-view-root{
+  grid-column:1/6;
+}
 
-#end img{
+#climate-change{
   width: 100%;
-  height: auto;
-  opacity: 0.4;
+  height: 100%;
+  position: absolute;
+}
+#cc{
+  position: relative;
 }
 
 /* Mobile ---------------------------------------------------------------*/
