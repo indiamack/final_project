@@ -7,7 +7,7 @@ function initMap() {
   var openPano = {lat: 35.2509828, lng: -75.52909};
   var contentString = '<div id="hydrograph">'  +  '</div>' + '<div id="hy-text">' + '<p>In North Carolina’s urban counties, rain doesn’t always fall on soil. There is miles and miles filled with highways, parking lots, driveways, houses, schools and office buildings – all impermeable surfaces. Impermeable surfaces do not allow precipitation to infiltrate and filter through the soil, a process essential for a healthy stream flow. The higher percentage of impermeable surfaces in an area, the more rainwater that runs directly into streams and rivers instead moving slowly through soil to groundwater. A larger volume of runoff picks up more nutrients and toxins along the way which goes into the state’s waterways. Those substances –including lawn clippings, herbicides, fertilizers – make their way downstream, where there are consequences for the health of both people and the environment.</p>' + '</div>' + '<div id="hy-text-2"><p>The hydrograph shows the difference in stream flow between urban, suburban, and rural areas, which each have increasingly less impermeable surfaces.  The more developed an area is, the quicker and higher the peak flow is, which means more runoff.</p></div>' + '</div>';
   var contentString2 = '<div id="rural">' + '<h3>It working again</h3>' + '</div>';
-  var contentString3 = '<div id="dashboard_div">' + '<div id="filter_div"></div>' + '<div id="chart_div"></div>' + '</div>';
+  var contentString3 = '<div id="dashboard_div">' + '</div>';
   var chosenPano = openPano;
 
 
@@ -270,55 +270,47 @@ function initMap() {
 
                 }
 
-
         } // end initMap
-
-
-
-
-
-
-
 
 
 
 $(function(){
 
-$('img[usemap]').imageMap();
+        $('img[usemap]').imageMap();
 
-    function selectRegion(region) {
-        document.querySelector("area").setAttribute('id', region);
-    }
+            function selectRegion(region) {
+                document.querySelector("area").setAttribute('id', region);
+            }
 
-Tipped.create('#beaufort', 'Beaufort', { target: 'mouse', position: 'top' });
-Tipped.create('#morehead', 'Morehead City', { target: 'mouse', position: 'top' });
-Tipped.create('#atlantic', 'Atlantic Beach', { target: 'mouse', position: 'top' });
-Tipped.create('#pineknoll', 'Pine Knoll Shores', { target: 'mouse', position: 'top' });
-Tipped.create('#emerald', 'Emerald Isle', { target: 'mouse', position: 'top' });
-Tipped.create('#harkers', 'Harkers Island', { target: 'mouse', position: 'top' });
-Tipped.create('#swansboro', 'Swansboro', { target: 'mouse', position: 'top' });
-Tipped.create('#newport', 'Newport', { target: 'mouse', position: 'top' });
-Tipped.create('#topsail', 'North Topsail Beach', { target: 'mouse', position: 'top' });
-Tipped.create('#lookout', 'Cape Lookout National Seashore', { target: 'mouse', position: 'top' });
-Tipped.create('#onslow', 'Onslow Bay', { target: 'mouse', position: 'top' });
+        Tipped.create('#beaufort', 'Beaufort', { target: 'mouse', position: 'top' });
+        Tipped.create('#morehead', 'Morehead City', { target: 'mouse', position: 'top' });
+        Tipped.create('#atlantic', 'Atlantic Beach', { target: 'mouse', position: 'top' });
+        Tipped.create('#pineknoll', 'Pine Knoll Shores', { target: 'mouse', position: 'top' });
+        Tipped.create('#emerald', 'Emerald Isle', { target: 'mouse', position: 'top' });
+        Tipped.create('#harkers', 'Harkers Island', { target: 'mouse', position: 'top' });
+        Tipped.create('#swansboro', 'Swansboro', { target: 'mouse', position: 'top' });
+        Tipped.create('#newport', 'Newport', { target: 'mouse', position: 'top' });
+        Tipped.create('#topsail', 'North Topsail Beach', { target: 'mouse', position: 'top' });
+        Tipped.create('#lookout', 'Cape Lookout National Seashore', { target: 'mouse', position: 'top' });
+        Tipped.create('#onslow', 'Onslow Bay', { target: 'mouse', position: 'top' });
 
-/* require([
-      "esri/Map",
-      "esri/views/MapView",
-      "dojo/domReady!"
-    ], function(Map, MapView) {
+        /* require([
+              "esri/Map",
+              "esri/views/MapView",
+              "dojo/domReady!"
+            ], function(Map, MapView) {
 
-    var map = new Map({
-      basemap: "topo-vector"
-    });
+            var map = new Map({
+              basemap: "topo-vector"
+            });
 
-    var view = new MapView({
-      container: "end",
-      map: map,
-      center: [-118.71511,34.09042],
-      zoom: 10
-    });
-  }); */
+            var view = new MapView({
+              container: "end",
+              map: map,
+              center: [-118.71511,34.09042],
+              zoom: 10
+            });
+          }); */
 
 
-}); // end scripts
+  }); // end  function scripts
