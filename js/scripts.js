@@ -5,17 +5,17 @@ function initMap() {
   var duplinCounty = {lat:35.039195, lng: -78.0494692};
   var baldHead = {lat: 33.8774832, lng:-78.0019814};
   var openPano = {lat: 35.2509828, lng: -75.52909};
-  var contentString = '<div id="hydrograph">'  +  '</div>' + '<div id="hy-text">' + '<p>In North Carolina’s urban counties, rain doesn’t always fall on soil. There is miles and miles filled with highways, parking lots, driveways, houses, schools and office buildings – all impermeable surfaces. Impermeable surfaces do not allow precipitation to infiltrate and filter through the soil, a process essential for a healthy stream flow. The higher percentage of impermeable surfaces in an area, the more rainwater that runs directly into streams and rivers instead moving slowly through soil to groundwater. A larger volume of runoff picks up more nutrients and toxins along the way which goes into the state’s waterways. Those substances –including lawn clippings, herbicides, fertilizers – make their way downstream, where there are consequences for the health of both people and the environment.</p>' + '</div>' + '<div id="hy-text-2"><p>The hydrograph shows the difference in stream flow between urban, suburban, and rural areas, which each have increasingly less impermeable surfaces.  The more developed an area is, the quicker and higher the peak flow is, which means more runoff.</p></div>' + '</div>';
-  var contentString2 = '<div id="rural">' + '<h3>It working again</h3>' + '</div>';
-  var contentString3 = '<div id="dashboard_div">' + '</div>';
+  var contentString = '<div class="window-heading flex">' + '<h2>Urban: Chapel Hill</h2>' + '</div>' + '<div id="hydrograph">'  +  '</div>' + '<div id="hy-text">' + '<p>In North Carolina’s urban counties, rain doesn’t always fall on soil. There is miles and miles filled with highways, parking lots, driveways, houses, schools and office buildings – all impermeable surfaces. Impermeable surfaces do not allow precipitation to infiltrate and filter through the soil, a process essential for a healthy stream flow. The higher percentage of impermeable surfaces in an area, the more rainwater that runs directly into streams and rivers instead moving slowly through soil to groundwater. A larger volume of runoff picks up more nutrients and toxins along the way which goes into the state’s waterways. Those substances –including lawn clippings, herbicides, fertilizers – make their way downstream, where there are consequences for the health of both people and the environment.</p>' + '</div>' + '<div id="hy-text-2"><p>The hydrograph shows the difference in stream flow between urban, suburban, and rural areas, which each have increasingly less impermeable surfaces.  The more developed an area is, the quicker and higher the peak flow is, which means more runoff.</p></div>' + '</div>';
+  var contentString2 = '<div class="window-heading flex">' + '<h2>Agriculture: Duplin County</h2>' + '</div>'+'<div id="rural">' + '<h3>It working again</h3>' + '</div>';
+  var contentString3 = '<div class="window-heading flex">' + '<h2>Coast: Bald Head Island</h2>' + '</div>' + '<div id="dashboard_div">' + '</div>';
   var chosenPano = openPano;
 
 
 
 
   var  map = new google.maps.Map(document.getElementById('map'), {
-      center: {lat: 35.028671, lng: -78.3400196},
-      zoom: 7
+      center: {lat: 35.1454592, lng: -78.4721548},
+      zoom: 6.6
     });
 
     //Show a street view
@@ -27,7 +27,27 @@ function initMap() {
                 pitch: 10
               }
             });
-        map.setStreetView(panorama);
+
+
+            map.setStreetView(panorama);
+
+            var panorama2 = new google.maps.StreetViewPanorama(
+                 document.getElementById('chapelhill'), {
+                   position: chapelHill,
+                   pov: {
+                     heading: 10,
+                     pitch: 10
+                   }
+                 });
+                 var panorama3 = new google.maps.StreetViewPanorama(
+                      document.getElementById('chapelhill'), {
+                        position: duplinCounty,
+                        pov: {
+                          heading: 10,
+                          pitch: 10
+                        }
+                      });
+
 
     // The marker, positioned at Jordan Lake near Chapel Hill
         var marker = new google.maps.Marker({
@@ -50,7 +70,9 @@ function initMap() {
             infoSection2.innerHTML = '';
             infoSection3.innerHTML = '';
             infoSection.innerHTML = contentString;
-            chosenPano = chapelHill;
+            panorama.innerHTML= '';
+            panorama3.innerHTML= '';
+            map.setStreetView(panorama2);
             initMap();
           });
 
@@ -139,7 +161,7 @@ function initMap() {
                 infoSection.innerHTML = '';
                 infoSection3.innerHTML = '';
                 infoSection2.innerHTML = contentString2;
-                chosenPano = duplinCounty;
+                map.setStreetView(panorama3);
                 initMap();
               });
 
@@ -194,7 +216,7 @@ function initMap() {
 
                 });//ajax
 
-                function buildChart1(){
+            function buildChart1(){
                 Highcharts.chart('dashboard_div', {
 
                     chart: {
@@ -204,20 +226,23 @@ function initMap() {
                     data: landings,
 
                     title: {
-                        text: 'Landings'
+                        text: 'Annual Seafood Catch in N.C.'
                     },
 
                     subtitle: {
-                        text: 'Source: U.S. Dept. of Agriculture Food and Nurition Service'
+                        text: 'Source: NOAA Fisheries'
                     },
 
-                    xAxis: {
+                    xAxis: [{
+                        title: {
+                            text: 'Year'
+                        },
                         categories: year
-                      },
+                      }],
 
                     yAxis: [{ // left y axis
                         title: {
-                            text: 'Percent Students Participating'
+                            text: 'Total Annual Landings'
                         },
                         labels: {
                             align: 'left',
@@ -260,15 +285,16 @@ function initMap() {
                     },
 
                     series: [{
-                        name: 'Summer Food Serive Program',
+                        name: 'Total Pounds',
                         data: pounds
                     }, {
-                        name: 'National School Lunch Program',
+                        name: 'Total U.S. Dollars',
                         data: dollars
-                    }]
+                    }],
+
                 });
 
-                }
+              } // end buildChart1
 
         } // end initMap
 
@@ -311,6 +337,8 @@ $(function(){
               zoom: 10
             });
           }); */
+
+
 
 
   }); // end  function scripts
