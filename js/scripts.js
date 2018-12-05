@@ -18,35 +18,6 @@ function initMap() {
       zoom: 6.6
     });
 
-    //Show a street view
-       var panorama = new google.maps.StreetViewPanorama(
-            document.getElementById('chapelhill'), {
-              position: chosenPano,
-              pov: {
-                heading: 10,
-                pitch: 10
-              }
-            });
-
-
-            map.setStreetView(panorama);
-
-            var panorama2 = new google.maps.StreetViewPanorama(
-                 document.getElementById('chapelhill'), {
-                   position: chapelHill,
-                   pov: {
-                     heading: 10,
-                     pitch: 10
-                   }
-                 });
-                 var panorama3 = new google.maps.StreetViewPanorama(
-                      document.getElementById('chapelhill'), {
-                        position: duplinCounty,
-                        pov: {
-                          heading: 10,
-                          pitch: 10
-                        }
-                      });
 
 
     // The marker, positioned at Jordan Lake near Chapel Hill
@@ -70,9 +41,7 @@ function initMap() {
             infoSection2.innerHTML = '';
             infoSection3.innerHTML = '';
             infoSection.innerHTML = contentString;
-            panorama.innerHTML= '';
-            panorama3.innerHTML= '';
-            map.setStreetView(panorama2);
+            chosenPano = chapelHill;
             initMap();
           });
 
@@ -161,7 +130,7 @@ function initMap() {
                 infoSection.innerHTML = '';
                 infoSection3.innerHTML = '';
                 infoSection2.innerHTML = contentString2;
-                map.setStreetView(panorama3);
+                chosenPano = duplinCounty;
                 initMap();
               });
 
@@ -295,12 +264,26 @@ function initMap() {
                 });
 
               } // end buildChart1
+              //Show a street view
+                 var panorama = new google.maps.StreetViewPanorama(
+                      document.getElementById('pano'), {
+                        position: chosenPano,
+                        pov: {
+                          heading: 10,
+                          pitch: 10
+                        }
+                      });
+
+                      map.setStreetView(panorama);
+
 
         } // end initMap
 
 
 
 $(function(){
+
+
 
         $('img[usemap]').imageMap();
 
@@ -400,8 +383,6 @@ $(function(){
           popupTemplate: template
         });
 
-        map.add(featureLayer);
-
         var legend = new Legend({
             view: view,
             layerInfos: [{
@@ -412,6 +393,10 @@ $(function(){
 
           view.ui.add(legend, "bottom-right");
 
+
+        $('#cc').click(function(){
+          $(this).css('display', 'none');
+          map.add(featureLayer);
           view.when(function() {
           // get the first layer in the collection of operational layers in the WebMap
           // when the resources in the MapView have loaded.
@@ -428,9 +413,19 @@ $(function(){
           // Add widget to the bottom right corner of the view
           view.ui.add(legend, "bottom-right");
         });
+        });
 
       }); //end esri function
 
 
+
+      $('#cc').click(function(){
+        if($(window).width() <= 767){
+          $('#explore-map').html(Tap);
+          $('#end').css('height', '500px');
+          $('#climate-change').css('display', 'block');
+        }
+        console.log('did it');
+      });
 
   }); // end  function scripts
