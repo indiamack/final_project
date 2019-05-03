@@ -1,4 +1,4 @@
-[
+ [
   {
     "Year": 1950,
     "Species": "TOTAL",
@@ -13,7 +13,7 @@
   },
   {
     "Year": 1952,
-    "Species": "TOTAL",
+    "Species": "TOTAL", 
     "Pounds": 240191800,
     "Dollars": 7216001
   },

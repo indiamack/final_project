@@ -5,69 +5,146 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
   <link rel="stylesheet" href="css/styles.css" type="text/css" />
-  <link rel="stylesheet" type="text/css" href="tipped/css/tipped/tipped.css"/>
   <link rel="stylesheet" type="text/css" href="https://www.highcharts.com/media/com_demo/css/highslide.css" />
-  <link rel="stylesheet" href="https://js.arcgis.com/4.9/esri/css/main.css">
-
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+       integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+      crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+     integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+     crossorigin=""></script>
 </head>
+
 <body class='site'>
   <div id="intro">
     <div id="open-map">
-      <img src="img/landsat_8_usgs.jpg" alt="image-map" usemap="#image-map">
-      <map name="image-map" id="image-map">
-        <area id="beaufort" alt="beaufort" title="beaufort" href="#" coords="2663,701,2704,713,2769,742,2846,719,2810,648,2834,601,2816,566,2840,542,2828,501,2852,454,2787,436,2710,518,2728,554,2722,583,2681,613,2710,636,2675,654,2486,513" shape="poly">
-        <area id="morehead" alt="morehead" title="morehead" href="#" coords="2628,672,2657,713,2581,672,2475,654,2345,636,2274,642,2251,601,2168,548,2257,530,2321,566,2380,589,2398,560,2522,554,2575,577" shape="poly">
-        <area id="atlantic" alt="atlantic" title="atlantic" href="#" coords="2569,725,2569,754,2498,748,2386,742,2321,748,2310,713,2369,707,2398,677,2475,695,2516,719" shape="poly">
-        <area id="pineknoll" alt="pineknoll" title="pineknoll" href="#" coords="2301,715,2309,749,2075,771,2072,745,2135,745,2198,708,2227,715" shape="poly">
-        <area id="emerald" alt="emerald" title="emerald" href="#" coords="2068,767,2046,767,2012,756,1986,756,1953,782,1831,797,1790,801,1749,804,1705,815,1657,819,1631,808,1382,878,1364,927,1486,882,1631,845" shape="poly">
-        <area id="harkers" alt="harkers" title="harkers" href="#" coords="2942,738,3117,797,3113,763,2998,730,3013,704,2931,689" shape="poly">
-        <area id="swansboro" alt="swansboro" title="swansboro" href="#" coords="1264,812,1279,771,1316,756,1330,704,1312,630,1260,682,1182,660,1186,745,1227,801" shape="poly">
-        <area id="newport" alt="newport" title="newport" href="#" coords="2160,430,2142,389,2094,282,2035,308,2023,393,1857,467,1909,534,2001,560,2138,530,2179,489" shape="poly">
-        <area id="topsail" alt="topsail" title="topsail" href="#" coords="615,1293,604,1312,611,1334,452,1419,352,1475,96,1623,70,1586,126,1538,311,1445,371,1405,515,1364,578,1267,589,1245,608,1271" shape="poly">
-        <area id="lookout" alt="lookout" title="lookout" href="#" coords="3028,982,3113,1253,3109,1116,3168,978,3376,663,3539,441,3698,274,3906,82,3873,37,3691,185,3546,378,3194,778,3165,934,3131,1004,3098,1067,3072,1056" shape="poly">
-        <area id="onslow" alt="onslow" title="onslow" href="#" coords="3113,1290,3013,956,2690,804,2375,782,1360,952,674,1345,56,1723,33,2668,4151,2676" shape="poly">
-      </map>
+      <img src="img/landsat_8_usgs.jpg" alt="image-map">
     </div>
     <div id="open-title" class="flex">
-      <h1>Upstream  / Downstream</h1>
-      <h4>As you travel east in North Carolina, you pass through metropolitan and then agricultural counties
-before reaching Albemarle-Pamlico Estuary System, the second largest in the country behind the Chesapeake Bay. That’s where the runoff from both cities and farms ends up, which has major ecological and economic consequences for the coast. Most North Carolinians
-don’t realize the impact they have downstream. Upstream / Downstream will help you exploring the connections between urban, rural and coastal North Carolina through its waterways.</h4>
+      <h1>Villains to Heroes:</h1>
+      <h2>The case for commericial fishermen</h2>
+      <h3>By India Mackinson</h3>
+      <h4>In the 1990s, North Carolina’s fisheries crashed. Saltwater anglers, environmental groups and state politicians easily found a culprit: commercial fishermen. For the past two decades, regulations have tightened around the industry while feuds between stakeholders have worsened. In the meantime, fish stocks only marginally improved, revealing that all North Carolinians, even those hours away from the coast, have a stake in this fight. </h4>
       <p><em>The U.S. Geological Survey's Landsat 8 satellite captures sediment pouring out of N.C.'s rivers on September 19, 2018, after Hurricane Florence.</em></p>
     </div>
   </div>
   <div id="main">
-    <div id="map"></div>
-    <div id="pano"></div>
-    <div id="chapelhill"></div>
-    <div id="explore">
-      <h2><em>Explore North Carolina with the map above.</em></h2>
+    <div class="content">
+      <p><span class="first-letter">T</span>here in the Hatteras Island surf, at the intersection between land and sea, I looked down to see a replica of the starry sky above me. Each step made the bioluminescent microorganisms in the wet sand glow faint blue. As I drew my footprints with this light, I saw the ocean rolling up to me and then stretching out to blur with the dark sky, going farther than I could ever see, hiding a facet of the universe as unfamiliar as space. A facet that made sand glow.</p>
+
+      <p>In moments like those out on North Carolina’s Outer Banks, the ocean to me was impenetrable. This was the one place humans could never dominate. Land could be bulldozed, developed and manicured from the mountains to the spot I stood, where water swirled around my ankles. The ocean, however, seemed forever untamed — big enough to swallow up anything we threw in it, abundant enough to restore what we removed.</p>
+
+      <p>But that wasn’t true. It’s there at the edge of the ocean, it laid out vast before me, that the seam between cultivation and wilderness pops. Fishing — the last vestige of humanity’s reliance on wild food — may escape the level of human control found on a corn field, but it still bends to our actions.</p>
+
+      <p>And it’s in trouble.</p>
+
+      <p>While the human population on North Carolina’s coast swelled over the decades, communities below the surface crashed. In 2017, commercial fishermen in North Carolina pulled in 85% less pounds of fish than they did during the industry’s peak in 1981, according to the National Marine Fisheries Service.</p>
+
+      <div id="landings"></div>
+
+      <p>When fisheries began crashing in the 1990s, all stakeholders — commercial fishermen, out-of-state saltwater anglers and charter boat captains — scrambled for reform. There were several problems to solve: unsustainable catch, poor water quality, disappearing habitat and climate change threats. Real change would mean cooperation beyond the seafood industry to minimize pollution from urban and agricultural runoff and responsibly develop coastal lands.</p>
+
+      <p>But some demanded — and successfully crowned — a scapegoat: the commercial fishing industry.</p>
+
+      <p>“Of the three groups, which one do you consistently hear painted as the villains of the environment? Commercial fishermen,” said Ernie Foster, a third-generation charter fisherman on Hatteras Island. “Yet they're the only ones that actually have to have a healthy environment in order to survive.”</p>
+
+      <p>The resulting regulations rolling out of the North Carolina General Assembly put the burden of restoring fisheries almost completely on commercial fishermen, biting these historic fishing villages year after year with new rules while leaving the teeth out of legislation protecting coastal habitat.</p>
+
+      <p>“You've heard that you've heard the term death of a thousand cuts?” said Foster. “If you a commercial fisherman if that applies to the industry over the last 20 years, they will say ‘absolutely.’”</p>
+
+      <p>Commercial fishermen are disappearing due to these regulatory wounds. Once they’re gone, so goes the knowledge, gained only by spending every day on the water, generation after generation, required for effective environmental reform. Villainizing commercial fishermen and pitting them against environmentalists won’t solve this complex problem. Only the collaboration of all owners of this resource — the people of North Carolina — will.</p>
+
+      <h2 class="subhead">Upstream, downstream</h2>
+
+      <p>To jumpstart its role in environmental stewardship, the General Assembly passed the Fisheries Reform Act in 1997, tightening regulations on commercial fishermen. Constant changes to catch limits, gear restriction and fishing seasons lengths in the past 22 years have strained the fleet, said Sara Mirabilio, a fisheries extension specialist at the North Carolina Sea Grant. Planning for an upcoming season, which includes making and buying gear, has become uncertain and expensive for commercial fishermen.</p>
+
+      <p>“It's really hard from the business timing standpoint to predict sometimes what's going to happen,” said Mirabilio. “It’s like looking at a magic eight ball.”</p>
+
+      <p>While the Fisheries Reform Act stipulated the creation of a coastal habitat protection plan, it left out an enforcement mechanism, meaning upstream polluters are nowhere near as regulated as the downstream fishermen. That leaves the state’s estuaries vulnerable to what washes downstream, said Jimmy Johnson, the Coastal Habitats Coordinator for the Albemarle-Pamlico National Estuary Partnership.</p>
+
+      <p>Every rainstorm pulls sediment, pesticides, fertilizer and livestock waste off of North Carolina’s 8.4 million acres of farmland. The excess nutrients and toxins make their way into streams and rivers, eventually tipping ecosystem resiliency past its limits. Nitrates in the runoff fertilize the water, resulting in exploding algae and bacteria populations. As the algae blooms die, decomposition causes dissolved oxygen levels to tank, depleting the oxygen supply to fish, oysters and submerged aquatic vegetation. The hypoxic conditions kill them.</p>
+
+      <p>“The farmers do the best that they can, because it doesn't do them any good to apply fertilizers or chemicals and then have it all wash off,” said Johnson. “It's almost impossible to fully control, but if they, if they were able to leave a 15-feet or 10-feet natural area around those ditches, it certainly would help.”</p>
+
+      <p>The high percentage of impervious surfaces — artificial structures impenetrable to water such as concrete driveways and brick buildings — in urban areas increase the amount of runoff containing sediment, chemicals and fertilizers going into river basins and, ultimately, the coast. Inland communities often don’t realize just how important their actions are to fisheries health, said Johnson.</p>
+
+      <p>“We've all got to do a better job of taking care of what we put back in the water,” said Johnson. “From homeowners and voters all across the spectrum, whoever uses water whether for recreation or for industry.”</p>
     </div>
-    <div id="city-window"></div>
-    <div id="rural-window"></div>
-    <div id="coast-window"></div>
-  </div>
-  <div id="end">
-    <div id="climate-change"></div>
-    <div id="cc" class="flex">
-      <h2>Climate will shift how our water moves.</h2>
-      <h4>Our communities will become more vulnerable in the process. Forming and implementing policy that keeps our water and resources clean is clearly already complicated enough, but climate change will make it even more of a challenge.<div id="explore-map">Click</div>to explore what communities are most at risk.</h4>
+
+      <div id="mapid"></div>
+      <div id="pano" class="pano-text">
+        <h1>Click on the markers to take a trip down the Cape Fear River.</h1>
+      </div>
+      <div id="pano1" class="pano-text">
+        <h1>Urban: Chapel Hill</h1>
+        <p>A high percentage of impervious surfaces in Chapel Hill means more runoff at a faster rate than nondeveloped area. The runoff will carry substances such as lawn fertilizers and pesticides down into streams and the state's waterways.</p>
+        <img src="img/ch.jpg">
+      </div>
+      <div id="pano2" class="pano-text">
+        <h1>Agriculture: Bladen County</h1>
+        <p>As the second most hog-producing state in the country, hog waste often gets washed downstream during rainstorms and hurricanes, ultimately leading to algae blooms and fish kills. Here, hogs retreat from flood waters from Hurricane Matthew.</p>
+        <img src="img/hogs.jpg">
+      </div>
+      <div id="pano3" class="pano-text">
+        <h1>Coast: Bald Head Island</h1>
+        <p>This is where what washes down from upstream ends up: the coast. Here, residents face the consequences of the actions from inland activities, such as poor water quality.</p>
+        <img style="width: 70%;"src="img/bh.jpg">
+      </div>
+
+      <div class="content">
+
+      <h2 class="subhead">The blame game</h2>
+
+      <p>Despite these upstream threats, commercial fishermen still receive most of the blame, said Barbara Garrity-Blake, a cultural anthropologist and author. For example, she’s seen recreational anglers pin the disappearance of croakers in the Pamlico Sound on commercial trawling.</p>
+
+      <p>“That's more likely a climate change thing,” said Garrity-Blake. “Climate change affects the distribution of particular fisheries. At the face of it, it might look like we have a reduction in those fisheries because they're overfished, but science shows a more complicated picture than that.”</p>
+
+      <p>While public perception overstates the threats of commercial fishermen, it understates the impact of recreational anglers. In 2018, there were 470,000 recreational fishing licenses issued with 35% to out-of-state residents, according to the North Carolina Division of Marine Fisheries. </p>
+
+      <p>“Think about if all registered saltwater anglers in North Carolina in just one day a year released just one fish dead, how many dead fish that is” said Mirabilio. “That's a lot. Nobody ever thinks of it in those terms.” </p>
+
+      <p>Both sides have a significant impact on fisheries, but rarely do they sit down, hear each other’s perspective and find a compromise in management policy.</p>
+
+      <p>“This is where I think conversation can come up with some workable solutions,” said Mirabilio. “But those conversations are not happening, because you go into a room and saltwater anglers say ‘we want all gillnets banned’ and then a commercial fisherman says ‘you're off your rocker. You don't even know what you're talking about.’ Then they start fighting.” </p>
+
+      <p>Rob Bizzell, a recreational fisherman, said the relationship between saltwater anglers and commercial fishermen hasn’t improved since the Fisheries Reform Act. </p>
+
+      <p>“It's never gotten better,” said Bizzell. “When you add bad on top of bad on top of bad, you have a worse relationship 20 years later than you did on day one.”</p>
+
+      <p>Both Miribilio and Garrity-Blake said that social media and internet forums have fueled the contention by spreading misinformation faster than science-based organizations like the North Carolina Sea Grant can respond. The resulting hostility has led to threats to the staff of the North Carolina Division of Marine Fisheries and forced increased security at its offices, said Garrity-Blake. </p>
+
+      <p>While opinions on how to best manage fisheries is steeply divided, everyone agrees on one thing: there’s need to be more conversation between stakeholders.</p>
+
+      <p>“Everybody's gotta put on their big boy britches, show up and do what's best for the resource,” said Bizzell. As chairman of the 9-member Marine Fisheries Commission, which regulates the state’s fisheries, he understands that it’s tough to ask commercial fishermen to limit their catch. </p>
+
+      <p>“It's hard telling somebody that for two to three years you’re going to have a huge reduction in your income” said Bizzell.</p>
+
+      <h2 class="subhead">From villains to heroes</h2>
+
+      <p>Commercial fishermen acknowledge the essentiality for management and the dangers of overfishing, but need better representation in management decisions, said Foster. </p>
+
+      <p>“It's not most of us, but it's some of us,” said Foster. “That is why we need responsible management. That is exceedingly well known and understood in the commercial fishing industry. There's pretty much no occupation in this state that intertwines you with nature as much as working on the water.”</p>
+
+      <p>“That understanding is in your face every day.”</p>
+
+      <p>Commercial fishermen could, and want to be, stewards of the sound and the ocean. Relinquishing some of their rights to fish is necessary for sustainability, yes, but they have an indispensable knowledge that can help conservationist and politicians put in policies that protect both the coast’s fish and people. </p>
+
+      <p>“When our fishermen are gone, we're going to lose our environmental stewards that are on the water every day,” said Garrity-Blake. “If we no longer eat local oysters, we're not going to even know or care if the water quality declines.”</p>
+
+      <p>One July weekend, I stopped into Harbor House Seafood in Hatteras Village to buy a couple pounds of fresh shrimp. As Ms. Vicky packed the shrimp for me, she showed me the jewel their fishermen caught in the Pamlico Sound that morning.</p>
+
+      <p>She placed a grey shrimp on the white counter, just like the ones she’d just packed for me in ice and sometimes jump into my kayak. Next to it she placed a monster in comparison, a blue shrimp four times bigger. Its glossy shell was the same speckled blue, turquoise, and green shades as Atlantic on the rare day I can see my feet through the water. Ms. Vicky encouraged me to take a picture to amaze my family with, which I did. The water around Hatteras Island surprised me again: I never thought I’d call a shrimp beautiful. </p>
     </div>
+
   </div>
+<div id="footer"></div>
 
 
   <script
     src="https://code.jquery.com/jquery-3.3.1.min.js"
     integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
     crossorigin="anonymous"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCGoOLJBi7r-iVCsBRbFO6Nq9tZGnlVzgc&callback=initMap"
-      async defer></script>
-      <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-   <script type="text/javascript" src="image-mapping/dist/image-map.js"></script>
-    <script type="text/javascript" src="tipped/js/tipped/tipped.js"></script>
+      <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="js/scripts.js"></script>
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-    <script src="https://js.arcgis.com/4.9/"></script>
 
 </body>
 </html>

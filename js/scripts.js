@@ -1,165 +1,8 @@
-// google maps Api -----------------------------------------------
-var chapelHill = {lat: 35.9133401, lng: -79.0551539};
-var duplinCounty = {lat:35.039195, lng: -78.0494692};
-var baldHead = {lat: 33.8774832, lng:-78.0019814};
-var openPano = {lat: 35.2508316, lng: -75.5288925};
-var chosenPano = openPano;
 
 
-function initMap() {
+$(function(){
 
-  var contentString = '<div class="window-heading flex">' + '<h2>Urban: Chapel Hill</h2>' + '</div>' + '<div id="hydrograph">'  +  '</div>' + '<div id="hy-text">' + '<p>In North Carolina’s urban counties, rain doesn’t always fall on soil. There is miles and miles filled with highways, parking lots, driveways, houses, schools and office buildings – all impermeable surfaces. Impermeable surfaces do not allow precipitation to infiltrate and filter through the soil, a process essential for a healthy stream flow. The higher percentage of impermeable surfaces in an area, the more rainwater that runs directly into streams and rivers instead moving slowly through soil to groundwater. A larger volume of runoff picks up more nutrients and toxins along the way which goes into the state’s waterways. Those substances –including lawn clippings, herbicides, fertilizers – make their way downstream, where there are consequences for the health of both people and the environment.</p>' + '</div>' + '<div id="hy-text-2"><p>The hydrograph shows the difference in stream flow between urban, suburban, and rural areas, which each have increasingly less impermeable surfaces.  The more developed an area is, the quicker and higher the peak flow is, which means more runoff.</p></div>' + '</div>';
-  var contentString2 = '<div class="window-heading flex">' + '<h2>Agriculture: Duplin County</h2>' + '</div>'+ '<img id="dashboard_div" src="img/hogs.jpg">' + '<div id="hy-text">' + '<p>Duplin County has more hogs than anywhere else in the United States -- which means they have more hog waste, too. The waste at the large factory farms in North Carolina is primparily stored in lagoons, open-air pits alongside the livestock houses. When it rains, that water goes into the lagoons, instantly becoming contaminated with untreated waste. The same thing happens when a hurricane comes through and floods the farm. The rainwater eventually washes downstream, bringing exessive nutrients and pathogens with it.</p>' + '</div>';
-  var contentString3 = '<div class="window-heading flex">' + '<h2>Coast: Bald Head Island</h2>' + '</div>' + '<div id="dashboard_div">' + '</div>' + '<div id="hy-text">' + '<p>Excess nutrients and pathogens drive down water quality, which leads to fish kills. This is bad for ecosystem health and for North Carolinas commerical fishing industry. Since commerical fishings heyday in the early 1990s, annual landings have dropped dramatically and are not recovering. Controversial policy has been passed at a federal and state level to try and correct the issue, but when it comes to preserving habitat, most of the legislation lacks teeth.</p>' + '</div>';
-
-
-
-
-  var  map = new google.maps.Map(document.getElementById('map'), {
-      center: {lat: 35.1454592, lng: -78.4721548},
-      zoom: 6.6
-    });
-
-
-
-    // The marker, positioned at Jordan Lake near Chapel Hill
-        var marker = new google.maps.Marker({
-          position: chapelHill,
-          map: map
-        });
-
-
-        var infowindow = new google.maps.InfoWindow({
-            content: contentString
-          });
-
-        var infoSection = document.getElementById('city-window');
-
-        var openSection= document.getElementById('explore');
-
-        marker.addListener('click', function() {
-            console.log('testing');
-            openSection.innerHTML = '';
-            infoSection2.innerHTML = '';
-            infoSection3.innerHTML = '';
-            infoSection.innerHTML = contentString;
-            chosenPano = chapelHill;
-            initMap();
-          });
-
-
-      // google charts API for Hyrdograph-----------------------
-      google.charts.load('current', {packages: ['corechart', 'line']});
-      google.charts.setOnLoadCallback(drawCrosshairs);
-
-                function drawCrosshairs() {
-
-                  var data = new google.visualization.DataTable();
-                      data.addColumn('number', 'Time');
-                      data.addColumn('number', 'Rural');
-                      data.addColumn('number', 'Suburban');
-                      data.addColumn('number', 'Urban');
-                      data.addRows([
-                        [0.21,	0.18,	0.26,	0.11],
-                        [0.87,	0.59,	1.52,	5.10],
-                        [1.20,	0.81,	2.72,	7.68],
-                        [1.53,	1.03,	4.21,	8.90],
-                        [1.86,	1.25,	5.15,	8.78],
-                        [2.19,	1.48,	5.31,	8.07],
-                        [2.52,	1.69,	5.18,	7.03],
-                        [2.85,	1.91,	4.97,	5.84],
-                        [3.18,	2.12,	4.48,	4.50],
-                        [3.51,	2.32,	3.94,	3.42],
-                        [3.84,	2.50,	3.10,	2.45],
-                        [4.17,	2.65,	2.29,	1.61],
-                        [4.50,	2.67,	1.62,	0.94],
-                        [4.83,	2.57,	1.13,	0.47],
-                        [5.15,	2.45,	0.72,	0.20],
-                        [5.48,	2.32, 0.44, 0],
-                        [5.81,	2.19,	0.30, 0],
-                        [6.13,	2.05,	0.24, 0],
-                        [6.46,	1.91, 0, 0],
-                        [6.78,	1.76, 0, 0],
-                        [7.11,	1.61, 0, 0],
-                        [7.44,	1.47, 0, 0],
-                        [7.76,	1.33, 0, 0],
-                        [8.09,	1.18, 0, 0 ],
-                        [8.42,	1.03, 0, 0 ],
-                        [8.74,	0.89, 0, 0],
-                        [9.07,	0.74, 0, 0],
-                        [9.40,	0.60, 0, 0],
-                        [9.72,	0.47, 0, 0],
-                        [10.03,	0.35, 0, 0]
-
-                      ]);
-
-
-                var options = {
-                  hAxis: {
-                    title: 'Time'
-                  },
-                  vAxis: {
-                    title: 'Flow'
-                  },
-                  //colors: ['#a52714', '#097138'],
-                  crosshair: {
-                    color: '#000',
-                    trigger: 'selection'
-                  }
-                };
-
-                  var chart = new google.visualization.LineChart(document.getElementById('hydrograph'));
-
-             chart.draw(data, options);
-           } //end DrawcCrosshairs
-
-
-            // The marker, positioned in Duplin County
-            var marker2 = new google.maps.Marker({
-              position: duplinCounty,
-              map: map
-            });
-
-            var infowindow2 = new google.maps.InfoWindow({
-                content: contentString2
-              });
-
-            var infoSection2 = document.getElementById('rural-window');
-
-            marker2.addListener('click', function() {
-                console.log('testing2');
-                openSection.innerHTML = '';
-                infoSection.innerHTML = '';
-                infoSection3.innerHTML = '';
-                infoSection2.innerHTML = contentString2;
-                chosenPano = duplinCounty;
-                initMap();
-              });
-
-
-              // The marker, positioned in Bald Head Island
-              var marker3 = new google.maps.Marker({
-                position: baldHead,
-                map: map
-              });
-
-              var infowindow3 = new google.maps.InfoWindow({
-                  content: contentString3
-                });
-
-              var infoSection3 = document.getElementById('coast-window');
-
-              marker3.addListener('click', function() {
-                  console.log('testing3');
-                  openSection.innerHTML = '';
-                  infoSection.innerHTML = '';
-                  infoSection2.innerHTML = '';
-                  infoSection3.innerHTML = contentString3;
-                  chosenPano = baldHead;
-                  initMap();
-                });
-
-                var url = './js/landings.json';
+  var url = 'js/landings.json';
                 var landings = [];
                 var year = [];
                 var pounds = [];
@@ -187,8 +30,9 @@ function initMap() {
 
                 });//ajax
 
-            function buildChart1(){
-                Highcharts.chart('dashboard_div', {
+
+      function buildChart1(){
+                Highcharts.chart('landings', {
 
                     chart: {
                         type: 'line'
@@ -263,171 +107,325 @@ function initMap() {
                         data: dollars
                     }],
 
-                });
+            });
 
-              } // end buildChart1
-              //Show a street view
-                 var panorama = new google.maps.StreetViewPanorama(
-                      document.getElementById('pano'), {
-                        position: chosenPano,
-                        pov: {
-                          heading: 10,
-                          pitch: 10
-                        }
-                      });
-
-                    map.setStreetView(panorama);
+}//end buildChart1
 
 
-        } // end initMap
+//MAP ------------------------------------------------------
+               var map = L.map('mapid').setView([35.3433523, -80.0866785], 6.5); // YOU CAN CHANGE THE ZOOM
+
+               // this line is creating the variable map by initializing the L.map class (a
+               // Leaflet class) with the mapid element that we created before. setView is a method
+               // that can be applied to the class L.map : you can give it a latitude, longitude
+               // and a zoom. The higher the value of the zoom, the finer the initial scale of the
+               // map.
+               L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer/tile/{z}/{y}/{x}', {
+                attribution: 'Tiles &copy; Esri &mdash; Sources: GEBCO, NOAA, CHS, OSU, UNH, CSUMB, National Geographic, DeLorme, NAVTEQ, and Esri'
+               }).addTo(map);
 
 
-
-$(function(){
-
-
-
-        $('img[usemap]').imageMap();
-
-            function selectRegion(region) {
-                document.querySelector("area").setAttribute('id', region);
-            }
-
-        Tipped.create('#beaufort', 'Beaufort', { target: 'mouse', position: 'top' });
-        Tipped.create('#morehead', 'Morehead City', { target: 'mouse', position: 'top' });
-        Tipped.create('#atlantic', 'Atlantic Beach', { target: 'mouse', position: 'top' });
-        Tipped.create('#pineknoll', 'Pine Knoll Shores', { target: 'mouse', position: 'top' });
-        Tipped.create('#emerald', 'Emerald Isle', { target: 'mouse', position: 'top' });
-        Tipped.create('#harkers', 'Harkers Island', { target: 'mouse', position: 'top' });
-        Tipped.create('#swansboro', 'Swansboro', { target: 'mouse', position: 'top' });
-        Tipped.create('#newport', 'Newport', { target: 'mouse', position: 'top' });
-        Tipped.create('#topsail', 'North Topsail Beach', { target: 'mouse', position: 'top' });
-        Tipped.create('#lookout', 'Cape Lookout National Seashore', { target: 'mouse', position: 'top' });
-        Tipped.create('#onslow', 'Onslow Bay', { target: 'mouse', position: 'top' });
-
-// ArcGIS REST API ---------------------------------
-
-    require([
-        "esri/Map",
-        "esri/views/MapView",
-        "esri/layers/FeatureLayer",
-        "esri/widgets/Legend",
-      ],
-      function(
-        Map, MapView,
-        FeatureLayer,
-        Legend,
-      )
-      {
-
-        var map = new Map({
-          basemap: "hybrid"
-        });
-
-        var view = new MapView({
-          container: "climate-change",
-          map: map,
-
-          extent: { // autocasts as new Extent()
-            xmin: -8177811,
-            ymin: 4247000,
-            xmax: -9876791,
-            ymax: 4247784,
-            spatialReference: 102100
-          }
-        });
-
-        var template = { // autocasts as new PopupTemplate()
-        title: "Social Vulnerability to Natural Disaster",
-        content: [{
-          // It is also possible to set the fieldInfos outside of the content
-          // directly in the popupTemplate. If no fieldInfos is specifically set
-          // in the content, it defaults to whatever may be set within the popupTemplate.
-          type: "fields",
-          fieldInfos: [{
-            fieldName: "OBJECTID",
-            label: "Location",
-            visible: false
-          }, {
-            fieldName: "ST_ABBREV",
-            label: "State",
-            visible: true,
-            format: {
-              digitSeparator: true,
-              places: 0
-            }
-          }, {
-            fieldName: "VulnerabilityScore",
-            label: "Vulnerability Score",
-            visible: true,
-            format: {
-              digitSeparator: true,
-              places: 3
-            }
-          },{
-            fieldName: "TOTPOP_CY",
-            label: "Total Population",
-            visible: true,
-            format: {
-              digitSeparator: true,
-              places: 0
-            }
-          }]
-        }]
-      };
-        /********************
-         * Add feature layer
-         ********************/
-
-        var featureLayer = new FeatureLayer({
-          url: "https://services.arcgis.com/nGt4QxSblgDfeJn9/arcgis/rest/services/Social_Vulnerability_2010/FeatureServer/0/query",
-          outFields: ["OBJECTID", "ST_ABBREV", "TOTPOP_CY", "VulnerabilityScore"],
-          popupTemplate: template
-        });
-
-        var legend = new Legend({
-            view: view,
-            layerInfos: [{
-              layer: featureLayer,
-              title: "Legend"
-            }]
-          });
-
-          view.ui.add(legend, "bottom-right");
+               // L.tileLayer can display a tile layer. You can check out other tile layer
+               //examples at https://leaflet-extras.github.io/leaflet-providers/preview/. The
+               //location of the tile layer needs to be in single quotes. You can also indicate
+               //the attribution for that layer. In this example we used the Open StreetMap
+               //attribution. The '&copy; <a> and the other information you see here is HTML code
+               //adding a copyright sign, and making a hyperlink to OpenStreetMap.
+               // At the end we include .addTo(map), which is indicating to add the tile layer
+               //to the variable map.
 
 
-        $('#cc').click(function(){
-          $(this).css('display', 'none');
-          map.add(featureLayer);
-          view.when(function() {
-          // get the first layer in the collection of operational layers in the WebMap
-          // when the resources in the MapView have loaded.
-          var featureLayer = webmap.layers.getItemAt(0);
+                L.marker([35.9133401, -79.0551539]).addTo(map)
+                 .bindPopup('Urban: Chapel Hill')
+                 .on('click', function(){
+                   $('#pano1').css({'display':'flex'});
+                   $('#pano2').css({'display':'none'});
+                      $('#pano3').css({'display':'none'});
+                        $('#pano').css({'display':'none'});
+                  });
 
-          var legend = new Legend({
-            view: view,
-            layerInfos: [{
-              layer: featureLayer,
-              title: "NY Educational Attainment"
-            }]
-          });
+               L.marker([34.6626924, -78.6264525]).addTo(map)
+                  .bindPopup('Agriculture: Bladen County')
+                  .on('click', function(){
+                    $('#pano2').css({'display':'flex'});
+                     $('#pano1').css({'display':'none'});
+                        $('#pano3').css({'display':'none'});
+                          $('#pano').css({'display':'none'});
 
-          // Add widget to the bottom right corner of the view
-          view.ui.add(legend, "bottom-right");
-        });
-        });
+                   });
 
-      }); //end esri function
+                  L.marker([33.8774832, -78.0019814]).addTo(map)
+                   .bindPopup('Coast: Bald Head Island')
+                   .on('click', function(){
+                     $('#pano3').css({'display':'flex'});
+                     $('#pano1').css({'display':'none'});
+                        $('#pano2').css({'display':'none'});
+                          $('#pano').css({'display':'none'});
+                    });
 
 
 
-      $('#cc').click(function(){
-        if($(window).width() <= 767){
-          $('#explore-map').html(Tap);
-          $('#end').css('height', '500px');
-          $('#climate-change').css('display', 'block');
-        }
-        console.log('did it');
-      });
+                // create a red polyline from an array of LatLng points
+              var latlngs = [
+                  [35.90525,-79.041189],
+                  [35.901426,-79.039644],
+                  [35.899271,-79.033413],
+                  [35.899271,-79.033413],
+                  [35.898923,-79.026082],
+                  [35.897602,-79.023336],
+                  [35.89343,-79.021705],
+                  [35.892596,-79.014409],
+                  [35.888842,-79.008051],
+                  [35.886895,-79.008566],
+                  [35.88467,-79.007193],
+                  [35.88161,-79.007021],
+                  [35.878828,-79.008223],
+                  [35.874238,-79.010798],
+                  [35.868952,-79.009425],
+                  [35.866309,-79.011828],
+                  [35.8645,-79.011485],
+                  [35.861718,-79.011485],
+                  [35.859631,-79.008051],
+                  [35.856849,-79.007536],
+                  [35.854066,-79.002043],
+                  [35.850588,-79.005991],
+                  [35.808341,-78.996427],
+                  [35.801798,-79.003637],
+                  [35.785567,-79.022617],
+                  [35.756597,-79.029483],
+                  [35.736057,-79.028036],
+                  [35.72017,-79.028036],
+                  [35.699164,-79.041254],
+                  [35.668908,-79.067689],
+                  [35.656634,-79.069064],
+                  [35.653286,-79.06769],
+                  [35.635456,-79.062852],
+                  [35.612572,-79.057187],
+                  [35.607967,-79.052552],
+                  [35.597499,-79.052895],
+                  [35.582123,-79.051325],
+                  [35.577655,-79.046518],
+                  [35.570255,-79.047033],
+                  [35.56048,-79.035017],
+                  [35.543331,-79.012701],
+                  [35.542353,-78.994848],
+                  [35.528049,-78.974876],
+                  [35.508349,-78.960113],
+                  [35.494331,-78.953194],
+                  [35.486504,-78.952336],
+                  [35.478956,-78.940491],
+                  [35.478956,-78.928131],
+                  [35.471267,-78.909077],
+                  [35.46929,-78.897453],
+                  [35.464536,-78.884235],
+                  [35.458804,-78.879429],
+                  [35.451812,-78.869644],
+                  [35.442163,-78.856598],
+                  [35.437548,-78.845096],
+                  [35.421484,-78.826358],
+                  [35.41337,-78.822925],
+                  [35.407354,-78.813998],
+                  [35.39812,-78.787906],
+                  [35.398259,-78.775546],
+                  [35.396582,-78.768884],
+                  [35.386647,-78.759957],
+                  [35.382588,-78.753949],
+                  [35.367471,-78.743993],
+                  [35.361032,-78.742963],
+                  [35.360192,-78.739358],
+                  [35.358652,-78.733178],
+                  [35.332967,-78.706077],
+                  [35.323583,-78.695434],
+                  [35.311286,-78.693306],
+                  [35.302881,-78.690044],
+                  [35.285368,-78.683178],
+                  [35.269575,-78.684564],
+                  [35.262427,-78.689714],
+                  [35.259904,-78.700185],
+                  [35.250652,-78.70173],
+                  [35.243503,-78.694692],
+                  [35.233969,-78.694578],
+                  [35.230884,-78.695093],
+                  [35.224013,-78.704534],
+                  [35.219806,-78.706079],
+                  [35.213495,-78.706079],
+                  [35.202739,-78.718729],
+                  [35.192639,-78.726454],
+                  [35.181976,-78.728686],
+                  [35.1744,-78.737097],
+                  [35.175522,-78.747912],
+                  [35.182958,-78.758383],
+                  [35.183941,-78.764219],
+                  [35.181275,-78.770571],
+                  [35.178447,-78.802976],
+                  [35.169007,-78.826587],
+                  [35.153149,-78.842895],
+                  [35.142271,-78.851521],
+                  [35.134129,-78.854439],
+                  [35.127952,-78.859246],
+                  [35.121213,-78.86079],
+                  [35.113911,-78.857357],
+                  [35.10067,-78.857872],
+                  [35.095614,-78.862679],
+                  [35.086624,-78.864739],
+                  [35.078336,-78.86285],
+                  [35.07089,-78.854954],
+                  [35.050135,-78.857235],
+                  [35.025561,-78.859105],
+                  [35.007565,-78.852754],
+                  [34.99572,-78.849753],
+                  [34.987986,-78.849753],
+                  [34.977296,-78.844604],
+                  [34.968435,-78.821429],
+                  [34.97708,-78.79488],
+                  [34.978065,-78.782005],
+                  [34.968922,-78.773079],
+                  [34.959918,-78.771362],
+                  [34.945989,-78.775825],
+                  [34.934426,-78.790073],
+                  [34.920774,-78.802948],
+                  [34.907402,-78.814964],
+                  [34.884833,-78.815517],
+                  [34.860408,-78.82623],
+                  [34.851252,-78.826745],
+                  [34.815723,-78.821065],
+                  [34.8122,-78.81643],
+                  [34.805575,-78.813168],
+                  [34.786311,-78.799391],
+                  [34.775596,-78.799906],
+                  [34.767558,-78.795443],
+                  [34.752045,-78.791233],
+                  [34.74598,-78.787629],
+                  [34.741043,-78.774926],
+                  [34.731169,-78.763253],
+                  [34.726958,-78.750166],
+                  [34.716658,-78.743128],
+                  [34.713695,-78.735575],
+                  [34.713554,-78.725791],
+                  [34.710449,-78.714633],
+                  [34.707486,-78.710684],
+                  [34.703252,-78.708796],
+                  [34.697889,-78.697123],
+                  [34.69803,-78.689913],
+                  [34.692949,-78.68442],
+                  [34.685997,-78.685533],
+                  [34.683032,-78.685018],
+                  [34.681903,-78.678667],
+                  [34.676962,-78.674719],
+                  [34.660867,-78.655149],
+                  [34.65409,-78.655149],
+                  [34.65649,-78.645536],
+                  [34.65183,-78.64073],
+                  [34.648726,-78.620613],
+                  [34.639264,-78.610141],
+                  [34.629235,-78.598812],
+                  [34.631213,-78.587997],
+                  [34.624998,-78.573234],
+                  [34.627823,-78.563278],
+                  [34.623585,-78.557784],
+                  [34.622455,-78.547313],
+                  [34.611887,-78.550827],
+                  [34.606518,-78.544132],
+                  [34.601007,-78.543102],
+                  [34.601573,-78.532802],
+                  [34.607931,-78.529713],
+                  [34.611887,-78.521644],
+                  [34.603975,-78.523533],
+                  [34.599312,-78.517696],
+                  [34.597334,-78.524734],
+                  [34.58942,-78.524391],
+                  [34.582354,-78.521473],
+                  [34.581624,-78.498373],
+                  [34.57272,-78.497858],
+                  [34.572296,-78.490476],
+                  [34.570034,-78.488073],
+                  [34.563532,-78.488073],
+                  [34.562825,-78.483953],
+                  [34.566359,-78.473653],
+                  [34.561835,-78.459405],
+                  [34.561977,-78.452711],
+                  [34.555332,-78.452539],
+                  [34.553353,-78.444643],
+                  [34.547431,-78.436187],
+                  [34.53725,-78.439277],
+                  [34.526644,-78.436702],
+                  [34.516885,-78.435844],
+                  [34.504647,-78.417406],
+                  [34.494319,-78.409166],
+                  [34.482293,-78.413114],
+                  [34.47618,-78.400285],
+                  [34.475048,-78.380544],
+                  [34.472076,-78.367154],
+                  [34.465849,-78.362176],
+                  [34.464576,-78.350675],
+                  [34.459339,-78.352563],
+                  [34.450704,-78.346383],
+                  [34.447732,-78.347241],
+                  [34.444476,-78.350503],
+                  [34.442069,-78.349816],
+                  [34.444476,-78.343465],
+                  [34.433345,-78.33558],
+                  [34.428814,-78.33558],
+                  [34.42485,-78.326825],
+                  [34.414937,-78.325452],
+                  [34.408706,-78.306913],
+                  [34.408423,-78.295411],
+                  [34.401624,-78.287858],
+                  [34.40474,-78.282193],
+                  [34.403486,-78.271722],
+                  [34.397537,-78.268804],
+                  [34.398529,-78.261422],
+                  [34.399945,-78.257303],
+                  [34.391305,-78.251123],
+                  [34.393854,-78.248376],
+                  [34.383371,-78.246145],
+                  [34.38068,-78.237218],
+                  [34.373737,-78.233957],
+                  [34.37898,-78.228978],
+                  [34.372003,-78.221203],
+                  [34.369028,-78.210217],
+                  [34.357975,-78.21056],
+                  [34.353157,-78.200089],
+                  [34.357408,-78.15889],
+                  [34.367469,-78.151307],
+                  [34.365486,-78.144269],
+                  [34.368036,-78.121095],
+                  [34.363927,-78.116632],
+                  [34.336149,-78.045017],
+                  [34.330337,-78.026821],
+                  [34.318295,-78.024787],
+                  [34.322974,-78.009853],
+                  [34.315885,-78.006763],
+                  [34.31149,-78.013457],
+                  [34.290572,-78.015131],
+                  [34.290147,-78.008093],
+                  [34.280928,-78.004831],
+                  [34.284474,-77.995733],
+                  [34.28107,-77.989896],
+                  [34.276956,-77.999853],
+                  [34.273694,-78.000883],
+                  [34.270147,-77.994531],
+                  [34.26887,-77.98921],
+                  [34.259348,-77.986537],
+                  [34.259774,-77.979327],
+                  [34.247855,-77.973147],
+                  [34.242463,-77.967654],
+                  [34.242179,-77.957011],
+                  [34.237496,-77.952376],
+                  [34.202347,-77.95767],
+                  [34.174445,-77.958512],
+                  [34.161946,-77.9604],
+                  [34.133708,-77.95293],
+                  [34.118076,-77.948639],
+                  [34.109691,-77.943832],
+                  [34.06918,-77.934694],
+                  [34.030944,-77.938718],
+                  [33.949672,-77.958159],
+                  [33.886139,-78.008025]
+                  ];
+              var polyline = L.polyline(latlngs, {color: '#170d37'}).addTo(map);
+              // zoom the map to the polyline
+              map.fitBounds(polyline.getBounds());
 
-  }); // end  function scripts
+
+});
